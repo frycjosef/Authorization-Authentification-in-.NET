@@ -1,0 +1,32 @@
+using Keycloak.AuthServices.Authentication;
+using Keycloak.AuthServices.Authorization;
+
+var builder = WebApplication.CreateBuilder(args);
+
+var host = builder.Host;
+var configuration = builder.Configuration;
+var services = builder.Services;
+
+host.ConfigureKeycloakConfigurationSource();
+services.AddKeycloakAuthentication(configuration);
+
+services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireWorkspaces", builder =>
+    {
+        builder.RequireProtectedResource("workspaces", "workspaces:read")
+            .RequireRealmRoles("User")
+            .RequireResourceRoles("Admin");
+
+    });
+}).AddKeycloakAuthorization(configuration);
+
+var app = builder.Build();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapGet("/workspaces", () => "[]")
+    .RequireAuthorization("RequireWorkspaces");
+
+app.Run();

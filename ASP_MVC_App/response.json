@@ -1,0 +1,41 @@
+{
+  "exp": 1673472166,
+  "iat": 1673471866,
+  "auth_time": 1673471865,
+  "jti": "8ee4ef53-240a-4215-9786-9766bc9692ea",
+  "iss": "http://localhost:8080/realms/BP",
+  "aud": "account",
+  "sub": "b6adf43a-8e48-4875-98c8-aabe720093ed",
+  "typ": "Bearer",
+  "azp": "asp-net-app",
+  "nonce": "638090686587672730.MDA2MzhhZDItY2ZmOS00OTgwLWI5YzctZjJlZjM5Nzk4ZDRlZTFkMzc5YjEtNDljYS00MjIxLTg2MmQtOWNmYWIyNDlkNWE2",
+  "session_state": "1b586b90-e314-4fbc-b657-d0efb99fe60a",
+  "given_name": "",
+  "family_name": "",
+  "preferred_username": "user_teacher",
+  "email_verified": false,
+  "acr": "1",
+  "allowed-origins": [
+    "https://localhost:7161"
+  ],
+  "realm_access": {
+    "roles": [
+      "read:subjects",
+      "default-roles-bp"
+    ]
+  },
+  "resource_access": {
+    "account": {
+      "roles": [
+        "manage-account",
+        "manage-account-links",
+        "view-profile"
+      ]
+    }
+  },
+  "scope": "openid profile email",
+  "sid": "1b586b90-e314-4fbc-b657-d0efb99fe60a",
+  "client_id": "asp-net-app",
+  "username": "user_teacher",
+  "active": true
+}

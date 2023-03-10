@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "Subject List";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="table-responsive">
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            @* Buttons *@
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var subject in Model)
+    {
+        <tr>
+            <td>
+                @subject.Id
+            </td>
+            <td>
+                @subject.Name
+            </td>
+            <td>
+                <button class="btn-primary me-2">
+                    Edit
+                </button>
+                <button class="btn-danger">
+                    Delete
+                </button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+</div>
