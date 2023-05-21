@@ -7,10 +7,12 @@ public class Token
     public Token(string json)
     {
         JObject jObject = JObject.Parse(json);
-        JToken jRealmPermissions =jObject["realm_access"]?["roles"];
-        RealmPermissions = jRealmPermissions == null ? jRealmPermissions.Select(p => p.ToString()).ToArray() : new string[]{};
-        JToken jClientPermissions = jObject["resource_access"]?["account"]?["roles"];
-        ClientPermissions = jRealmPermissions == null ? jClientPermissions.Select(p => p.ToString()).ToArray() : new string[]{};
+        var jRealmPermissions =jObject["realm_access"]?["roles"] as JArray;
+        RealmPermissions = jRealmPermissions != null ? 
+            jRealmPermissions.Select(p => p.ToString()).ToArray() : new string[]{};
+        var jClientPermissions = jObject["resource_access"]?["account"]?["roles"] as JArray;
+        ClientPermissions = jClientPermissions != null ? 
+            jClientPermissions.Select(p => p.ToString()).ToArray() : new string[]{};
     }
 
     public string[] RealmPermissions { get; set; }

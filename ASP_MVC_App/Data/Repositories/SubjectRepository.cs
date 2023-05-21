@@ -5,7 +5,7 @@ namespace ASP_MVC_App.Data.Repositories;
 
 public class SubjectRepository : BaseRepository, ISubjectRepository
 {
-    private IQueryable<Subject> AllSubjects => _dbContext.Subjects;
+    private IQueryable<Subject> AllSubjects => DbContext.Subjects;
     
     public SubjectRepository(BPContext dbContext) : base(dbContext)
     {

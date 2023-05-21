@@ -17,6 +17,7 @@ public class AccountController : BaseController
     {
     }
     
+    [Route("access-denied")]
     public IActionResult AccessDenied()
     {
         return View();
@@ -25,23 +26,12 @@ public class AccountController : BaseController
     [Route("logout")]
     public async Task<IActionResult> Logout()
     {
-        // KeycloakService.Logout();
-        // await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        // await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
-        // Request.HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
-
-        // return Redirect("http://localhost:8080/realms/BP/protocol/openid-connect/logout?client_id=" +
-        //                 Configuration.GetSection("KeyCloak:client_id").Value);
+        KeycloakService.ClearCache();
 
         return new SignOutResult(OpenIdConnectDefaults.AuthenticationScheme, new AuthenticationProperties
         {
             RedirectUri = "https://localhost:7161"
         });
-        // return new SignOutResult(OpenIdConnectDefaults.AuthenticationScheme, new OpenIdConnectChallengeProperties(new Dictionary<string, string?>()
-        // {
-        //     {"post_logout_redirect_uri", "https://localhost:7161"},
-        //     {"id_token_hint", HttpContext.GetTokenAsync("id_token").Result}
-        // }));
     }
 }

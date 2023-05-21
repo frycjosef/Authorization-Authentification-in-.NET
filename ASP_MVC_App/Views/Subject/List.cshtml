@@ -1,44 +1,55 @@
+@using Microsoft.AspNetCore.Authentication
+@using ASP_MVC_App.Keycloak
 @{
     ViewData["Title"] = "Subject List";
 }
 
 <h1>@ViewData["Title"]</h1>
 
+<button type="button" class="btn btn-success mb-2" onclick="navigateToCreate()" @(PermissionHelper.HasPermission("CreateSubjects", ViewContext.HttpContext) ? "" : "disabled")>Create New Subject</button>
+
 <div class="table-responsive">
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            Id
-        </th>
-        <th>
-            Name
-        </th>
-        <th>
-            @* Buttons *@
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var subject in Model)
-    {
+    <table class="table">
+        <thead>
         <tr>
-            <td>
-                @subject.Id
-            </td>
-            <td>
-                @subject.Name
-            </td>
-            <td>
-                <button class="btn-primary me-2">
-                    Edit
-                </button>
-                <button class="btn-danger">
-                    Delete
-                </button>
-            </td>
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                @* Buttons *@
+            </th>
         </tr>
-    }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        @foreach (var subject in Model)
+        {
+            <tr>
+                <td>
+                    @subject.Id
+                </td>
+                <td>
+                    @subject.Name
+                </td>
+                <td>
+                    <a class="btn btn-primary me-1" asp-action="Detail" asp-route-id="@subject.Id">Detail</a>
+                    @using (Html.BeginForm("DeleteSubject", "Subject", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("id", subject.Id, new { })
+                        <button type="submit" class="btn btn-danger" @(PermissionHelper.HasPermission("DeleteSubjects", ViewContext.HttpContext) ? "" : "disabled")>Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
 </div>
+
+<script>
+    function navigateToCreate() {
+        window.location.href = '@Url.Action("Create", "Subject")';
+    }
+</script>

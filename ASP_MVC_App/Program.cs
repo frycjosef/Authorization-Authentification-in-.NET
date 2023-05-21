@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using MySql.EntityFrameworkCore.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddMvc();
 
+builder.Services.AddMemoryCache();
+
 builder.Host.ConfigureLogging(logging =>
 {
     logging.ClearProviders();
@@ -26,13 +29,12 @@ builder.Host.ConfigureLogging(logging =>
 
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-builder.Services.AddDbContext<BPContext>(options =>
+builder.Services.AddEntityFrameworkMySQL().AddDbContext<BPContext>(options =>
 {
-    options.UseMySQL(builder.Configuration.GetConnectionString("BPDatabase"));
+    options.UseMySQL(builder.Configuration.GetConnectionString("BPDatabase") ?? string.Empty);
 });
 
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
-builder.Services.AddSingleton<IRepositoryManagerFactory, RepositoryManagerFactory>();
 
 builder.Services.AddAuthentication(options => 
 {
@@ -42,7 +44,7 @@ builder.Services.AddAuthentication(options =>
     .AddOpenIdConnect(options =>
     {
         //Keycloak URL Server
-        options.Authority = builder.Configuration.GetSection("KeyCloak:auth-server-url").Value; //builder.Configuration.GetSection("KeyCloak:auth-server-url").Value;
+        options.Authority = builder.Configuration.GetSection("KeyCloak:auth-server-url").Value;
         //Client configured in Keycloak
         options.ClientId = builder.Configuration.GetSection("KeyCloak:client_id").Value;
         //Client's Secret configured in Keycloak
@@ -53,17 +55,13 @@ builder.Services.AddAuthentication(options =>
 
         options.AccessDeniedPath = "/Account/AccessDenied";
 
-        options.RequireHttpsMetadata = false;//Boolean.Parse(builder.Configuration.GetSection("KeyCloak:RequireHttpsMetadata").Value);;
+        options.RequireHttpsMetadata = false;
         options.SaveTokens = true;
         options.GetClaimsFromUserInfoEndpoint = true;
 
         //OpenID flow to use
         options.ResponseType = OpenIdConnectResponseType.Code;
         
-        options.ClaimActions.MapJsonKey("role", "role", "role");
-        options.TokenValidationParameters.RoleClaimType = "role";
-        
-        options.SignedOutRedirectUri = "https://localhost:7161";
 
         options.Events = new OpenIdConnectEvents()
         {

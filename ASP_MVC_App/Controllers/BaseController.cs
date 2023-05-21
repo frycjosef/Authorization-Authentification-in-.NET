@@ -14,4 +14,9 @@ public class BaseController : Controller
         Configuration = configuration;
         KeycloakService = service;
     }
+
+    public bool Authorize(string permission)
+    {
+        return KeycloakService.Authorize(permission);
+    }
 }
