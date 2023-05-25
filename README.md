@@ -85,13 +85,13 @@
 6. K nastavení OTP použijte na svém mobilním zařízení aplikaci Google Authenticator, nebo FreeOTP.
 7. Zadejte OTP, které se Vám vygenerovalo ve Vámi nastavené aplikaci ve vašem mobilním zařízení.
 8. Po úspěšném přihláníšení jste přesměrování na další stránku 
-  1. V případě, že uživatel má oprávnění pro čtení předmětů (ReadSubjects), bude Vám zobrazena stránka s předměty.
-  2. V případě, že uživatel nemá roli pro mazání, budete přesměrování na stránku s nápisem Access Denied (přístup odepřen). V případě, že chcete navštívit požadovanou stránku, přihlašte se jako jiný uživatel, nebo současnému uživateli přidělte roli pro zobrazení předmětů (ReadSubjects), odhlašte se z aplikace a přihlaste se znovu.
+   - V případě, že uživatel má oprávnění pro čtení předmětů (ReadSubjects), bude Vám zobrazena stránka s předměty.
+   - V případě, že uživatel nemá roli pro mazání, budete přesměrování na stránku s nápisem Access Denied (přístup odepřen). V případě, že chcete navštívit požadovanou stránku, přihlašte se jako jiný uživatel, nebo současnému uživateli přidělte roli pro zobrazení předmětů (ReadSubjects), odhlašte se z aplikace a přihlaste se znovu.
 
 ### Vytvoření předmětu
 1. Po úspěšném přihlášení a zobrazení tabulky předmětů vidíte jednotlivé předměty a vedle jednotlivých předmětů tlačítka Edit a Delete.
-  1. V případě, že uživatel nemá roli pro vytváření předmětů, tlačítko Create New Subject nebude možné stisknout.
-  2. V případě, že má uživatel roli pro vytváření předmětů (CreateSubjects), můžete kliknout na tlačítko Create New Subject. Pokračujte bodem 2.
+   - V případě, že uživatel nemá roli pro vytváření předmětů, tlačítko Create New Subject nebude možné stisknout.
+   - V případě, že má uživatel roli pro vytváření předmětů (CreateSubjects), můžete kliknout na tlačítko Create New Subject. Pokračujte bodem 2.
 2. Klikněte na tlačítko Create New Subject
 3. Budete předměrování na stránku pro vytváření předmětů.
 4. Do textových polí doplňte název předmětu a jeho popisek.
@@ -101,13 +101,13 @@
 
 ### Mazání předmětů
 1. Po úspěšném přihlášení a zobrazení tabulky předmětů vidíte jednotlivé předměty a vedle jednotlivých předmětů tlačítka Edit a Delete.
-  1. V případě, že má uživatel roli pro mazání předmětů (DeleteSubjects), můžete kliknout na tlačítko Delete u zvoleného předmětu a tím ho smazat.
-  2. V případě, že uživatel nemá roli pro mazání, tlačítko Delete nebude možné stisknout.
+   - V případě, že má uživatel roli pro mazání předmětů (DeleteSubjects), můžete kliknout na tlačítko Delete u zvoleného předmětu a tím ho smazat.
+   - V případě, že uživatel nemá roli pro mazání, tlačítko Delete nebude možné stisknout.
 
 ### Úprava předmětů
 1. Po úspěšném přihlášení a zobrazení tabulky předmětů vidíte jednotlivé předměty a vedle jednotlivých předmětů tlačítka Edit a Delete.
-  1. V případě, že uživatel nemá roli pro úpravu předmětů, tlačítko Edit nebude možné stisknout.
-  2. V případě, že má uživatel roli pro úpravu (EditSubjects), nebo jakoukoliv její variantu (EditSubjects.Name), můžete kliknout na tlačítko Edit, které Vás přesměruje na detail předmětu. Pokračujte bodem 2.
+   - V případě, že uživatel nemá roli pro úpravu předmětů, tlačítko Edit nebude možné stisknout.
+   - V případě, že má uživatel roli pro úpravu (EditSubjects), nebo jakoukoliv její variantu (EditSubjects.Name), můžete kliknout na tlačítko Edit, které Vás přesměruje na detail předmětu. Pokračujte bodem 2.
 2. Po zobrazení detailu předmětu vidíte textová pole, která obsahují název a popisek předmětu.
 3. V případě, že uživatel nemá dostatečnou roli pro úpravu daného parametru (např. Name), bude dané textové pole zašedlé a text v něm obsažený nebude možno upravit.
 4. Po provedení požadovaných úprav klikněte na tlačítko Save a tím se uloží provedené úpravy.
