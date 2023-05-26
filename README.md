@@ -1,4 +1,6 @@
 # Autorizace a Autentifikace v .NET (webová aplikace) za pomoci Keycloak
+Webová aplikace, která prokazuje, že za pomocí IAM systému Keycloak je možno ověřovat aplikace na platformě .NET.
+Repozitář s mobilní aplikací najdete [zde](https://github.com/frycjosef/Authorization-Authentification-in-.NET-mobile)
 
 ## Postup pro nastavení Keycloak
 1. Nainstalovat [Docker](https://www.docker.com).
