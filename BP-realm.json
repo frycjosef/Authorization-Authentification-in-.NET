@@ -55,8 +55,8 @@
         "attributes": {}
       },
       {
-        "id": "2223f342-bbfa-460f-92a1-c9f0336770c7",
-        "name": "EditSubjects.Name",
+        "id": "27c6d55d-b353-4887-81f9-f99fc2fa3b70",
+        "name": "DeleteExam",
         "description": "",
         "composite": false,
         "clientRole": false,
@@ -90,8 +90,8 @@
         "attributes": {}
       },
       {
-        "id": "5380bf6f-2d02-4ad9-8fb3-7563e6fef913",
-        "name": "EditSubjects.Description",
+        "id": "88d35f3d-dff8-47d9-98f9-d498a93036a0",
+        "name": "EditExams",
         "description": "",
         "composite": false,
         "clientRole": false,
@@ -108,8 +108,35 @@
         "attributes": {}
       },
       {
+        "id": "f5d5f7b4-ef89-497b-81fe-0d4164c6223d",
+        "name": "ReadUsers",
+        "description": "",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "ff60ed13-3600-44c5-9456-264750dd29cf",
+        "attributes": {}
+      },
+      {
+        "id": "3a05bc20-8d96-44d1-9652-1870240153b8",
+        "name": "EditUser",
+        "description": "",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "ff60ed13-3600-44c5-9456-264750dd29cf",
+        "attributes": {}
+      },
+      {
         "id": "33fea709-42e5-43f5-9106-aad289421119",
         "name": "CreateSubjects",
+        "description": "",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "ff60ed13-3600-44c5-9456-264750dd29cf",
+        "attributes": {}
+      },
+      {
+        "id": "185484a1-3170-4cb1-9892-947b23071e12",
+        "name": "ReadExams",
         "description": "",
         "composite": false,
         "clientRole": false,
@@ -475,28 +502,52 @@
       "subGroups": []
     },
     {
-      "id": "1ea2b469-9509-49b5-b291-a9a66255f5b5",
-      "name": "teachers",
-      "path": "/teachers",
+      "id": "354a38a3-0469-4a30-b520-de5ed3a72a83",
+      "name": "principal",
+      "path": "/principal",
       "attributes": {},
       "realmRoles": [
         "ReadSubjects",
-        "EditSubjects.Name",
+        "DeleteExam",
+        "EditExams",
         "DeleteSubjects",
-        "EditSubjects"
+        "EditSubjects",
+        "ReadUsers",
+        "EditUser",
+        "CreateSubjects",
+        "ReadExams"
       ],
       "clientRoles": {},
       "subGroups": [
         {
-          "id": "ed499993-99ce-4ae5-886d-7a4fad7164d3",
-          "name": "students",
-          "path": "/teachers/students",
+          "id": "1ea2b469-9509-49b5-b291-a9a66255f5b5",
+          "name": "teachers",
+          "path": "/principal/teachers",
           "attributes": {},
-          "realmRoles": [],
+          "realmRoles": [
+            "ReadSubjects",
+            "DeleteExam",
+            "EditExams",
+            "EditSubjects",
+            "ReadUsers",
+            "ReadExams"
+          ],
           "clientRoles": {},
           "subGroups": []
         }
       ]
+    },
+    {
+      "id": "3e47d32a-0ab5-4766-9e9b-01887153287d",
+      "name": "students",
+      "path": "/students",
+      "attributes": {},
+      "realmRoles": [
+        "ReadSubjects",
+        "ReadExams"
+      ],
+      "clientRoles": {},
+      "subGroups": []
     }
   ],
   "defaultRole": {
@@ -912,7 +963,7 @@
             "logic": "POSITIVE",
             "decisionStrategy": "UNANIMOUS",
             "config": {
-              "groups": "[{\"path\":\"/teachers\",\"extendChildren\":false}]",
+              "groups": "[{\"path\":\"/principal/teachers\",\"extendChildren\":false}]",
               "groupsClaim": ""
             }
           },
@@ -1909,13 +1960,13 @@
   "accountTheme": "keycloak.v2",
   "adminTheme": "keycloak.v2",
   "emailTheme": "keycloak",
-  "eventsEnabled": false,
+  "eventsEnabled": true,
   "eventsListeners": [
     "jboss-logging"
   ],
   "enabledEventTypes": [],
-  "adminEventsEnabled": false,
-  "adminEventsDetailsEnabled": false,
+  "adminEventsEnabled": true,
+  "adminEventsDetailsEnabled": true,
   "identityProviders": [
     {
       "alias": "google",
@@ -1968,6 +2019,33 @@
         "config": {}
       },
       {
+        "id": "ed63f0f6-bfee-413f-b902-4452c06b1f1e",
+        "name": "Full Scope Disabled",
+        "providerId": "scope",
+        "subType": "anonymous",
+        "subComponents": {},
+        "config": {}
+      },
+      {
+        "id": "20258700-3fb1-4ba0-9407-ddf46bece357",
+        "name": "Allowed Protocol Mapper Types",
+        "providerId": "allowed-protocol-mappers",
+        "subType": "authenticated",
+        "subComponents": {},
+        "config": {
+          "allowed-protocol-mapper-types": [
+            "saml-role-list-mapper",
+            "oidc-usermodel-attribute-mapper",
+            "saml-user-property-mapper",
+            "oidc-usermodel-property-mapper",
+            "saml-user-attribute-mapper",
+            "oidc-full-name-mapper",
+            "oidc-sha256-pairwise-sub-mapper",
+            "oidc-address-mapper"
+          ]
+        }
+      },
+      {
         "id": "725a1574-1f2e-404d-832c-300995a8c0a0",
         "name": "Allowed Client Scopes",
         "providerId": "allowed-client-templates",
@@ -2004,33 +2082,6 @@
         }
       },
       {
-        "id": "ed63f0f6-bfee-413f-b902-4452c06b1f1e",
-        "name": "Full Scope Disabled",
-        "providerId": "scope",
-        "subType": "anonymous",
-        "subComponents": {},
-        "config": {}
-      },
-      {
-        "id": "20258700-3fb1-4ba0-9407-ddf46bece357",
-        "name": "Allowed Protocol Mapper Types",
-        "providerId": "allowed-protocol-mappers",
-        "subType": "authenticated",
-        "subComponents": {},
-        "config": {
-          "allowed-protocol-mapper-types": [
-            "saml-role-list-mapper",
-            "oidc-usermodel-attribute-mapper",
-            "saml-user-property-mapper",
-            "oidc-usermodel-property-mapper",
-            "saml-user-attribute-mapper",
-            "oidc-full-name-mapper",
-            "oidc-sha256-pairwise-sub-mapper",
-            "oidc-address-mapper"
-          ]
-        }
-      },
-      {
         "id": "7f40efca-9071-44af-a4f2-63feb1b78ed6",
         "name": "Trusted Hosts",
         "providerId": "trusted-hosts",
@@ -2046,6 +2097,14 @@
         }
       }
     ],
+    "org.keycloak.userprofile.UserProfileProvider": [
+      {
+        "id": "3af90be0-b067-4c3e-9e51-9ce4773bf125",
+        "providerId": "declarative-user-profile",
+        "subComponents": {},
+        "config": {}
+      }
+    ],
     "org.keycloak.keys.KeyProvider": [
       {
         "id": "00392470-8a05-465e-b121-4b50efec4800",
@@ -2055,6 +2114,20 @@
         "config": {
           "priority": [
             "100"
+          ]
+        }
+      },
+      {
+        "id": "c593231f-2c4d-419b-a97d-0ae274e6d99e",
+        "name": "rsa-enc-generated",
+        "providerId": "rsa-enc-generated",
+        "subComponents": {},
+        "config": {
+          "priority": [
+            "100"
+          ],
+          "algorithm": [
+            "RSA-OAEP"
           ]
         }
       },
@@ -2080,20 +2153,6 @@
         "config": {
           "priority": [
             "100"
-          ]
-        }
-      },
-      {
-        "id": "c593231f-2c4d-419b-a97d-0ae274e6d99e",
-        "name": "rsa-enc-generated",
-        "providerId": "rsa-enc-generated",
-        "subComponents": {},
-        "config": {
-          "priority": [
-            "100"
-          ],
-          "algorithm": [
-            "RSA-OAEP"
           ]
         }
       }
@@ -2789,17 +2848,18 @@
   "dockerAuthenticationFlow": "docker auth",
   "attributes": {
     "cibaBackchannelTokenDeliveryMode": "poll",
-    "cibaExpiresIn": "120",
     "cibaAuthRequestedUserHint": "login_hint",
-    "oauth2DeviceCodeLifespan": "600",
     "oauth2DevicePollingInterval": "5",
     "clientOfflineSessionMaxLifespan": "0",
     "clientSessionIdleTimeout": "0",
-    "parRequestUriLifespan": "60",
-    "clientSessionMaxLifespan": "0",
     "clientOfflineSessionIdleTimeout": "0",
     "cibaInterval": "5",
-    "realmReusableOtpCode": "false"
+    "realmReusableOtpCode": "false",
+    "cibaExpiresIn": "120",
+    "oauth2DeviceCodeLifespan": "600",
+    "parRequestUriLifespan": "60",
+    "clientSessionMaxLifespan": "0",
+    "adminEventsExpiration": ""
   },
   "keycloakVersion": "20.0.2",
   "userManagedAccessAllowed": false,
